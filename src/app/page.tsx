@@ -1,7 +1,11 @@
-import prisma from '@/lib/prisma';
+'use client';
 
-export default async function Home() {
-  const users = await prisma.user.findFirst();
+import { useTRPC } from '@/trpc/client';
+import { useQuery } from '@tanstack/react-query';
+
+export default function Home() {
+  const trpc = useTRPC();
+  const { data: users } = useQuery(trpc.getUsers.queryOptions());
 
   return (
     <div className="h-screen flex items-center justify-center">

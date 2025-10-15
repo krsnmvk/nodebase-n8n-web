@@ -22,6 +22,8 @@ export default function Home() {
     })
   );
 
+  const testAI = useMutation(trpc.testAI.mutationOptions());
+
   return (
     <div className="h-screen flex flex-col  items-center gap-3 justify-center">
       <Button
@@ -40,6 +42,13 @@ export default function Home() {
         }
       >
         Logout
+      </Button>
+      <Button
+        type="button"
+        onClick={() => testAI.mutate()}
+        disabled={testAI.isPending}
+      >
+        Test AI
       </Button>
       <Button type="button" disabled={isPending} onClick={() => mutate()}>
         Create Workflow

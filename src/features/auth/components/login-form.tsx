@@ -22,6 +22,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { authClient } from '@/lib/auth-client';
 import { toast } from 'sonner';
@@ -80,7 +81,13 @@ export default function LoginForm() {
                     variant="outline"
                     className="w-full"
                   >
-                    Continue with Google
+                    <Image
+                      src="/google.svg"
+                      alt="Google"
+                      width={20}
+                      height={20}
+                    />
+                    <span>Continue with Google</span>
                   </Button>
                   <Button
                     type="button"
@@ -88,7 +95,13 @@ export default function LoginForm() {
                     variant="outline"
                     className="w-full"
                   >
-                    Continue with Github
+                    <Image
+                      src="/github.svg"
+                      alt="Github"
+                      width={20}
+                      height={20}
+                    />
+                    <span>Continue with Github</span>
                   </Button>
                 </div>
                 <div className="grid gap-6">

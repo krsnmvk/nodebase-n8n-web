@@ -25,6 +25,7 @@ import Link from 'next/link';
 import { authClient } from '@/lib/auth-client';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 const registerSchema = z
   .object({
@@ -90,7 +91,13 @@ export default function RegisterForm() {
                     variant="outline"
                     className="w-full"
                   >
-                    Continue with Google
+                    <Image
+                      src="/google.svg"
+                      alt="Google"
+                      width={20}
+                      height={20}
+                    />
+                    <span>Continue with Google</span>
                   </Button>
                   <Button
                     type="button"
@@ -98,7 +105,13 @@ export default function RegisterForm() {
                     variant="outline"
                     className="w-full"
                   >
-                    Continue with Github
+                    <Image
+                      src="/github.svg"
+                      alt="Github"
+                      width={20}
+                      height={20}
+                    />
+                    <span>Continue with Github</span>
                   </Button>
                 </div>
                 <div className="grid gap-6">

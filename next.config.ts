@@ -5,6 +5,16 @@ const nextConfig: NextConfig = {
   experimental: {
     reactCompiler: true,
   },
+
+  async redirects() {
+    return [
+      {
+        destination: '/workflows',
+        source: '/',
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

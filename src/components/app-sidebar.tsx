@@ -5,6 +5,7 @@ import {
   FolderOpenIcon,
   HistoryIcon,
   KeyIcon,
+  LogOutIcon,
   StarIcon,
 } from 'lucide-react';
 import {
@@ -22,6 +23,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { authClient } from '@/lib/auth-client';
+import { useHasActiveSubscription } from '@/features/subscriptions/hooks/use-subcription';
 
 const menuItems = [
   {
@@ -49,6 +51,7 @@ const menuItems = [
 export default function AppSidebar() {
   const router = useRouter();
   const pathname = usePathname();
+  const { isPending, hasActiveSubscription } = useHasActiveSubscription();
 
   return (
     <Sidebar collapsible="icon">
@@ -95,17 +98,21 @@ export default function AppSidebar() {
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenu>
+          {!hasActiveSubscription && !isPending && (
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                onClick={async () => await authClient.checkout({ slug: 'pro' })}
+                tooltip="Upgrade to Pro"
+                className="gap-x-4 h-10 px-4"
+              >
+                <StarIcon className="size-4" />
+                <span>Upgrade to Pro</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          )}
           <SidebarMenuItem>
             <SidebarMenuButton
-              tooltip="Upgrade to Pro"
-              className="gap-x-4 h-10 px-4"
-            >
-              <StarIcon className="size-4" />
-              <span>Upgrade to Pro</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton
+              onClick={async () => await authClient.customer.portal()}
               tooltip="Billing Portal"
               className="gap-x-4 h-10 px-4"
             >
@@ -125,7 +132,7 @@ export default function AppSidebar() {
               tooltip="Logout"
               className="gap-x-4 h-10 px-4"
             >
-              <CreditCardIcon className="size-4" />
+              <LogOutIcon className="size-4" />
               <span>Logout</span>
             </SidebarMenuButton>
           </SidebarMenuItem>

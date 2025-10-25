@@ -1,0 +1,6 @@
+procs:
+  next:
+    cmd: ["npm", "run", "dev:web"]
+ 
+  inngest:
+    cmd: ["npm", "run", "dev:inngest"]

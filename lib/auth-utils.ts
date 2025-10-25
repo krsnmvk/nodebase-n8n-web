@@ -11,6 +11,8 @@ export async function requireAuth() {
   if (!session) {
     return redirect('/sign-in');
   }
+
+  return session;
 }
 
 export async function requireUnauth() {

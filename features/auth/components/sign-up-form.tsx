@@ -25,6 +25,7 @@ import { authClient } from '@/lib/auth-client';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { Spinner } from '@/components/ui/spinner';
+import Image from 'next/image';
 
 const signUpSchema = z
   .object({
@@ -94,6 +95,12 @@ export function SignUpForm() {
                     size="lg"
                     className="w-full"
                   >
+                    <Image
+                      src="/google.svg"
+                      alt="Google"
+                      width={20}
+                      height={20}
+                    />
                     <span>Continue with Google</span>
                   </Button>
                   <Button
@@ -103,6 +110,12 @@ export function SignUpForm() {
                     size="lg"
                     className="w-full"
                   >
+                    <Image
+                      src="/github.svg"
+                      alt="Github"
+                      width={20}
+                      height={20}
+                    />
                     <span>Continue with Github</span>
                   </Button>
                 </div>

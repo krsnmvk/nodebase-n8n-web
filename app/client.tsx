@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
 export default function Client() {
-  const { data } = authClient.useSession();
+  const { data, isPending } = authClient.useSession();
 
   const router = useRouter();
 
@@ -27,6 +27,7 @@ export default function Client() {
             },
           });
         }}
+        disabled={isPending}
         variant="destructive"
         size="lg"
       >

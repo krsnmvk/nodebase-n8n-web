@@ -1,19 +1,24 @@
-import db from '@/lib/db';
 import { inngest } from './client';
+import { generateText } from 'ai';
+import { createGoogleGenerativeAI } from '@ai-sdk/google';
 
-export const helloWorld = inngest.createFunction(
-  { id: 'hello-world' },
-  { event: 'test/hello.world' },
+const google = createGoogleGenerativeAI();
 
-  async ({ step }) => {
-    await step.sleep('wait-a-moment', '1s');
+export const execute = inngest.createFunction(
+  { id: 'execute-ai' },
+  { event: 'execute/ai' },
 
-    await step.run('create-workflow', async () => {
-      return await db.workflow.create({
-        data: {
-          name: 'test-workflows',
-        },
-      });
-    });
+  async ({ event, step }) => {
+    const { steps } = await step.ai.wrap(
+      'gemeini-generate-text',
+      generateText,
+      {
+        model: google('gemini-2.5-flash'),
+        system: 'You are a helful assistent.',
+        prompt: 'What is 1 + 1?',
+      }
+    );
+
+    return steps;
   }
 );

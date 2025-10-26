@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev:web": "next dev --turbopack",
+    "dev:web": "next dev",
     "dev:inngest": "inngest-cli dev",
     "dev": "mprocs",
     "build": "next build --turbopack",
@@ -13,6 +13,8 @@
   "dependencies": {
     "@ai-sdk/google": "^2.0.23",
     "@hookform/resolvers": "^5.2.2",
+    "@polar-sh/better-auth": "^1.1.11",
+    "@polar-sh/sdk": "^0.38.1",
     "@prisma/client": "^6.18.0",
     "@prisma/extension-accelerate": "^2.0.2",
     "@radix-ui/react-accordion": "^1.2.12",

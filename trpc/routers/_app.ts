@@ -1,6 +1,6 @@
 import { inngest } from '@/inngest/client';
-import { createTRPCRouter, protectedProcedure } from '../init';
 import db from '@/lib/db';
+import { createTRPCRouter, premiumProcedure, protectedProcedure } from '../init';
 
 export const appRouter = createTRPCRouter({
   getWorkflows: protectedProcedure.query(async () => {
@@ -21,7 +21,7 @@ export const appRouter = createTRPCRouter({
     };
   }),
 
-  testAI: protectedProcedure.mutation(async () => {
+  testAI: premiumProcedure.mutation(async () => {
     await inngest.send({
       name: 'execute/ai',
     });

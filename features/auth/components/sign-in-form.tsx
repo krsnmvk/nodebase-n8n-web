@@ -1,15 +1,7 @@
 'use client';
 
-import { useForm } from 'react-hook-form';
-import z from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Form,
   FormControl,
@@ -19,13 +11,15 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 import { Spinner } from '@/components/ui/spinner';
 import { authClient } from '@/lib/auth-client';
-import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
+import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import z from 'zod';
 
 const signInSchema = z.object({
   email: z.email(),
@@ -58,7 +52,7 @@ export function SignInForm() {
         },
         onError: (ctx) => {
           toast.error(ctx.error.message);
-          console.error(ctx.error);
+          console.log(ctx.error);
         },
       }
     );
@@ -85,12 +79,7 @@ export function SignInForm() {
                     size="lg"
                     className="w-full"
                   >
-                    <Image
-                      src="/google.svg"
-                      alt="Google"
-                      width={20}
-                      height={20}
-                    />
+                    <Image src="/google.svg" alt="Google" width={20} height={20} />
                     <span>Continue with Google</span>
                   </Button>
                   <Button
@@ -100,12 +89,7 @@ export function SignInForm() {
                     size="lg"
                     className="w-full"
                   >
-                    <Image
-                      src="/github.svg"
-                      alt="Github"
-                      width={20}
-                      height={20}
-                    />
+                    <Image src="/github.svg" alt="Github" width={20} height={20} />
                     <span>Continue with Github</span>
                   </Button>
                 </div>
@@ -158,13 +142,8 @@ export function SignInForm() {
                   </Button>
                 </div>
                 <p className="text-sm text-center">
-                  <span className="text-muted-foreground">
-                    Don&apos;t have an account?
-                  </span>{' '}
-                  <Link
-                    href="/sign-up"
-                    className="underline underline-offset-4"
-                  >
+                  <span className="text-muted-foreground">Don&apos;t have an account?</span>{' '}
+                  <Link href="/sign-up" className="underline underline-offset-4">
                     Sign up
                   </Link>
                 </p>

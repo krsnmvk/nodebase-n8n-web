@@ -22,6 +22,13 @@ export default function Client() {
       },
     })
   );
+  const testAI = useMutation(
+    trpc.testAI.mutationOptions({
+      onSuccess: () => {
+        toast.success('AI Job Queued');
+      },
+    })
+  );
 
   return (
     <div className="min-h-screen flex flex-col gap-5 items-center justify-center">
@@ -55,6 +62,16 @@ export default function Client() {
         size="lg"
       >
         Create Workflows
+      </Button>
+
+      <Button
+        type="button"
+        onClick={() => testAI.mutate()}
+        disabled={testAI.isPending}
+        variant="default"
+        size="lg"
+      >
+        Test AI
       </Button>
 
       <div>{JSON.stringify(getWorkflows.data, null, 2)}</div>

@@ -28,3 +28,22 @@ export function useCreateWorkflow() {
     })
   );
 }
+
+export function useRemoveWorkflow() {
+  const queryClient = useQueryClient();
+  const trpc = useTRPC();
+
+  return useMutation(
+    trpc.workflows.remove.mutationOptions({
+      onSuccess: (data) => {
+        queryClient.invalidateQueries(trpc.workflows.getMany.queryOptions({}));
+        queryClient.invalidateQueries(
+          trpc.workflows.getOne.queryOptions({ id: data.id })
+        );
+      },
+      onError: (err) => {
+        console.log(err.message);
+      },
+    })
+  );
+}
